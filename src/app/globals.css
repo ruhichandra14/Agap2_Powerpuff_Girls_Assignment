@@ -1,26 +1,231 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+  --ds-surface: #ffffff;
+  --ds-surface-sunken: #f4f5f7;
+  --ds-background-neutral: #f4f5f7;
+  --ds-background-brand-bold: #0052cc;
+  --ds-text: #172b4d;
+  --ds-text-subtle: #5e6c84;
+  --ds-text-inverse: #ffffff;
+  --ds-link: #0052cc;
+  --ds-border: #dfe1e6;
+  --ds-border-focused: #0052cc;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --app-header-bg: #0052cc;
+  --app-header-text: #ffffff;
+  --app-accent: #ffab00;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-sans: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  --font-mono: var(--font-geist-mono), monospace;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--ds-surface-sunken);
+  color: var(--ds-text);
+  font-family: var(--font-sans);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+
+.skip-link {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link:focus {
+  position: fixed;
+  top: 8px;
+  left: 8px;
+  width: auto;
+  height: auto;
+  padding: 8px 16px;
+  margin: 0;
+  overflow: visible;
+  clip: auto;
+  background: var(--app-header-bg);
+  color: var(--app-header-text);
+  border-radius: 3px;
+  z-index: 1000;
+  font-size: 14px;
+}
+
+.app-header {
+  background: var(--app-header-bg);
+  color: var(--app-header-text);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.app-nav {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px 24px;
+}
+
+.app-logo {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--app-header-text);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.app-logo:hover {
+  color: var(--app-accent);
+}
+
+.app-logo:focus {
+  outline: 2px solid var(--app-accent);
+  outline-offset: 4px;
+  border-radius: 3px;
+}
+
+.app-main {
+  flex: 1;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 32px 24px;
+}
+
+.app-main:focus {
+  outline: none;
+}
+
+.app-footer {
+  background: var(--app-header-bg);
+  padding: 24px 0;
+  margin-top: auto;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 14px;
+}
+
+.footer-link {
+  color: var(--app-accent);
+  text-decoration: none;
+}
+
+.footer-link:hover {
+  text-decoration: underline;
+}
+
+.footer-link:focus {
+  outline: 2px solid var(--app-accent);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.episode-grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 16px;
+}
+
+@media (min-width: 640px) {
+  .episode-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .episode-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.show-card-layout {
+  display: flex;
+  flex-direction: column;
+}
+
+.show-card-image {
+  position: relative;
+  min-height: 200px;
+  background-color: #f4f5f7;
+  margin: 0;
+}
+
+.show-card-content {
+  flex: 1;
+}
+
+.show-meta-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  .show-card-layout {
+    flex-direction: row;
+  }
+  .show-card-image {
+    width: 33.333%;
+    min-height: auto;
+  }
+  .show-card-content {
+    width: 66.666%;
+  }
+  .show-meta-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.episode-meta-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  .episode-meta-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+.skeleton-image {
+  aspect-ratio: 16/9;
+  background: #f4f5f7;
+  animation: pulse 1.5s infinite;
+}
+.skeleton-line {
+  height: 16px;
+  background: #f4f5f7;
+  border-radius: 3px;
+  margin-bottom: 8px;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
 }
