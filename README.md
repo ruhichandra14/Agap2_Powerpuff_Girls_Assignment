@@ -10,6 +10,7 @@ npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) to view the app.
+Or, alternatively use: https://agap2-powerpuff-girls-assignment.vercel.app
 
 Other commands:
 - `npm test` - run tests
